@@ -1,90 +1,161 @@
-const log = console.log;
+
+let playerBool = false;
+let aiBool = false;
+let playerChoice;
+let aiChoice;
+let Stats = document.querySelector(".status");
+let HumanScore = document.querySelector(".human-score .no");
+let compScore = document.querySelector(".comp-score .no");
+let end = false;
+let count = 1;
+let playerImg = document.querySelector(".image.inverted");
+let compImg = document.querySelector(".image.cmp");
+let choice = document.querySelectorAll(".button");
+const playerButton = document.querySelector("[data-symbol]");
+const modal = document.querySelector(".modal");
+const overlay = document.querySelector(".overlay");
+const playAgain =  document.querySelector(".play-again");
+const rules =  document.querySelector(".rules");
+const reset =  document.querySelector(".reset");
+
+log = console.log;
 
 
-function getCompChoice() {
+Stats.textContent = "Choosing...";
+
+playerButton.addEventListener("click", () => {
+    modal.classList.add("active");
+    overlay.classList.add("active");
+
+})
+
+overlay.addEventListener("click", () => {
+    modal.classList.remove("active");
+    overlay.classList.remove("active");
+})
+
+function changePic(input,img){
+if (input == "R"){
+    img.src= "img/rock.png";
+}else if(input == "P"){
+    img.src= "img/paper.png";
+}else{
+    img.src= "img/Untitled.png";
+}
+}
+choice.forEach(btn => {
+    btn.addEventListener("click", () => {
+        
+        if (btn.id === "rock" || btn.id === "paper" || btn.id === "scissors") {
+            playerBool = true;
+            modal.classList.remove("active");
+            overlay.classList.remove("active");
+
+            playerChoice = btn.id.charAt(0).toUpperCase();
+            changePic(playerChoice,playerImg);
+            playGame();
+        } else {
+            return NaN;
+        }
+    });
+});
+playAgain.addEventListener("click", ()=> {
+    location.reload();
+})
+
+reset.addEventListener("click", ()=>{
+    choice = 0;
+    HumanScore = 0; 
+    compScore = 0; 
+        
+
+})
+
+function calcCompChoice() {
     let num = Math.floor(Math.random() * 3);
-    if (num == 0) { return ("R") }
-    else if (num == 1) { return ("P") }
-    else if (num == 2) { return ("S") }
+    if (num == 0) { aiBool = true; return ("R") }
+    else if (num == 1) { aiBool = true; return ("P") }
+    else if (num == 2) { aiBool = true; return ("S") }
     else
         return 0;
 }
 
-function getHumanChoice() {
-    let ans = prompt("Enter Your Choice Rock, Paper or Scissors!")
-    if (ans == "Rock" || ans == "R" || ans == "r" || ans.toLowerCase()== "rock") {
-        return "R";
+
+function playRound() {
+    count++; 
+    Stats.textContent= "Round - " + count; 
+
+    aiChoice = calcCompChoice();
+    changePic(aiChoice,compImg);
+
+    if (playerBool) {
+
+
+
+        if (aiChoice == "R") {
+            if (playerChoice == "R") {
+                log("Tie!")
+            } else if (playerChoice == "P") {
+                log(`You Win! ${playerChoice} beats ${aiChoice}`);
+                HumanScore.textContent++;
+                end = true;
+
+            } else {
+                log(`aiChoice Wins! ${aiChoice} beats ${playerChoice}`);
+                compScore.textContent++;
+            }
+        } else if (aiChoice == "P") {
+
+            if (playerChoice == "P") {
+                log("Tie")
+            } else if (playerChoice == "S") {
+                log(`You Win! ${playerChoice} beats ${aiChoice} `);
+                HumanScore.textContent ++;
+
+            } else {
+                log(`aiChoice Wins! ${aiChoice} beats ${playerChoice}`);
+                compScore.textContent ++;
+            }
+        } else {
+
+            if (playerChoice == "S") {
+                log("Tie")
+            } else if (playerChoice == "R") {
+                log(`You Win!  ${playerChoice} beats ${aiChoice} `);
+                HumanScore.textContent++;
+
+            } else {
+                log(`Computer Wins! ${aiChoice} beats ${playerChoice}`);
+                compScore.textContent++;
+            }
+
+           
+        }
+
+
+       
+        Stats.textContent= "Round - " + count; 
+
+    } else {
+        console.log("no player choice made");
     }
-    else if (ans == "Paper" || ans == "P" || ans == "p" || ans.toLowerCase()=="paper") {
-        return "P";
-    }
-    else if (ans == "Scissors" || ans == "S" || ans == "s" || ans.toLowerCase() == "scissors") {
-        return "S"
-    }
-    else
-        return 0;
+
 
 }
 
-let computerScore = 0;
-let HumanScore = 0;
+function playGame() {
+    if (count == 5) {
+        if (HumanScore.textContent > compScore.textContent) {
+            Stats.textContent = "You Win";
 
-function playRound(computer, human) {
-    log("Round Begins!")
-    computer=getCompChoice();
-    
-    human=getHumanChoice();
-    if (computer == "R") {
-        if (human == "R") {
-            log("Tie!")
-        } else if (human == "P") {
-            log(`You Win! ${human} beats ${computer}`);
-            HumanScore++;
+        } else if (compScore.textContent > HumanScore.textContent) {
+            Stats.textContent = "You Lose";
 
-        } else{
-            log(`Computer Wins! ${computer} beats ${human}`);
-        computerScore++;} 
-    }else if( computer == "P"){
-
-        if (human == "P") {
-            log("Tie")
-        } else if (human == "S") {
-            log(`You Win! ${human} beats ${computer} `);
-            HumanScore++;
-
-        } else{
-            log(`Computer Wins! ${computer} beats ${human}`);
-        computerScore++;
+        } else {
+            Stats.textContent = "Tie";
         }
-    }else {
-
-        if (human == "S") {
-            log("Tie")
-        } else if (human == "R") {
-            log(`You Win!  ${human} beats ${computer} `);
-            HumanScore++;
-
-        } else{
-            log(`Computer Wins! ${computer} beats ${human}`);
-        computerScore++;
-        }
+    } else {
+        playRound();
     }
-} 
-    function playGame(){
-        for (let i = 0; i < 5 ; i++) {
-            playRound();
-        }
-        if (HumanScore>computerScore){
-            alert(`You win! ${HumanScore} vs ${computerScore}`)
-        }else{
-            alert(`You lose ${HumanScore} vs ${computerScore}`)
-        }
-
-    }
-
-
-playGame();
-a =true;
-while (a) {
-    confirm("Do you want to play again?") ? playGame() : a = false;
 }
+

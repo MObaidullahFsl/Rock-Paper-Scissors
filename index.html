@@ -1,14 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
+
 <body>
-    <h1 style="text-align: center;">Rock Paper Scissors game!</h1>
-    <h3>This is a basic Java Script implementation of Rock Paper Scissors</h3>
-    <p>To see the game outcome open the console by ctrl+shift+I</p>
+    
+    
+    <div class="overlay">
+        
+    </div>
+
+     <div class="modal">
+
+        <div class="title">
+            Make Your Pick
+        </div>
+        <div class="choices">
+            <div class="button"id="rock" ><img class="image"  src="img/rock.png" alt=""></div>
+            <div class="button"  id="paper" ><img class="image" src="img/paper.png" alt=""></div>
+            <div class="button" id="scissors"><img class="image"  src="img/Untitled.png" alt=""></div>
+        </div>
+     </div>
+
+    <div class="header">
+        <div class="title">
+            <div>ROCK</div><div>PAPER</div><div>SCISSORS</div><div>THE</div<div>GAME</div>
+        </div>
+        <div class="score">
+                <div class="human-score">
+                        <div class="player">Player</div>
+                        <div class="no">0</div>
+                </div>
+                <div class="comp-score">
+                    <div class="computer">Computer</div>
+                    <div class="no">0</div>
+                </div>
+
+        </div>
+
+    </div>
+
+    <div class="main-body">
+        <div class="human-choice">
+                <div class="name">Player</div>
+                <div  data-symbol class="symbol"> 
+                    <img  class="image inverted" src="img/rock.png" alt="players choice">
+                </div>
+        </div>
+        <div class="end-screen">
+                <div class="status">You Win</div>
+                <div class="play-again">Play Again</div>
+        </div>
+        <div class="comp-choice">
+            <div class="name">Computer</div>
+            <div class="symbol">
+                <img class="image cmp" src="img/paper.png" alt="">
+            </div>  
+
+        </div>
+    </div>
+
+    <div class="footer">
+        
+                <div class="rules">Rules</div>
+        
+        
+                <div class="reset">Reset</div>
+        
+    </div>
+
+
+
 </body>
+
 </html>
+
+
+
+
+
