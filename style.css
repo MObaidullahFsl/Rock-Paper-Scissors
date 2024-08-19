@@ -24,7 +24,7 @@ body{
     
 }
 
-.score,.main-body,.footer,.top,.Row1{
+.score,.main-body,.footer,.top,.Row1,.logo{
     display:flex;
    
 }
@@ -202,3 +202,25 @@ body{
     transform: translate(-50%,-50% )scale(1);
  
 }
+
+.footerbuttons{
+    display: flex;
+    
+    
+    
+}
+.footer{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+.logo img{  
+    width: 20%;
+    height: 20%;
+    object-fit: contain;
+    margin: 0px auto;
+}
+
+
+
