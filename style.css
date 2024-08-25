@@ -220,6 +220,13 @@ body{
     height: 20%;
     object-fit: contain;
     margin: 0px auto;
+    margin-top: 10px;
+
+
+}
+.git:hover{
+    transform: rotate(360deg);
+    transition: transform .7s;
 }
 
 
