@@ -17,7 +17,7 @@ Play against the computer and see if you can outsmart it!
 
 ## Live Demo
 
-Try it out here: [Live Demo](YOUR_LIVE_DEMO_LINK_HERE)  
+Try it out here: [Live Demo](https://mobaidullahfsl.github.io/Rock-Paper-Scissors/)  
 
 ---
 
@@ -35,7 +35,4 @@ Try it out here: [Live Demo](YOUR_LIVE_DEMO_LINK_HERE)
 
 ---
 
-## License
-
-Open for fun and learning purposes.  
 
